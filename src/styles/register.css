@@ -1,0 +1,21 @@
+@import "tailwindcss";
+
+body{
+    height: 100vh;
+    width: 100vw;
+}
+
+#root{
+    height: 100%;
+    width: 100%;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+
+@theme {
+  --color-regal-blue: #243c5a; 
+  --color-anand: red;
+}

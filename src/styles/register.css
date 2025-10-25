@@ -14,6 +14,10 @@ body{
     display: none;
 }
 
+.react-hot-toast .rht-exit {
+    animation-duration: 0s !important;
+    transition: none !important;
+}
 
 @theme {
   --color-regal-blue: #243c5a; 

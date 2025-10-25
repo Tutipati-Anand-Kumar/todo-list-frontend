@@ -3,12 +3,14 @@ import React, { useContext, useEffect, useState } from "react";
 import { GlobalContext } from "../context/Context";
 import service from "../services/service";
 import toast from "react-hot-toast";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
     const { userdata } = useContext(GlobalContext);
     const [allTodo, setAllTodo] = useState([]);
+    const [showConfirm, setShowConfirm] = useState(false);
+    const [confirmTaskId, setConfirmTaskId] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -27,30 +29,9 @@ const Dashboard = () => {
 
     const { mode } = useContext(GlobalContext);
 
-    const confirmDelete = (onConfirm) => {
-        toast.custom((t) => (
-            // Responsive adjustments for the custom toast
-            <div className="bg-white p-4 rounded-lg shadow-2xl max-w-[300px] w-full mx-auto">
-                <p className="text-center font-medium">Are you sure you want to delete?</p>
-                <div className="flex justify-center gap-3 mt-3">
-                    <button
-                        onClick={async () => {
-                            toast.dismiss(t.id);
-                            await onConfirm();
-                        }}
-                        className="bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 transition-colors"
-                    >
-                        OK
-                    </button>
-                    <button
-                        onClick={() => toast.dismiss(t.id)}
-                        className="bg-gray-300 px-3 py-1 text-sm rounded hover:bg-gray-400 transition-colors"
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </div>
-        ), { duration: Infinity });
+    const confirmDelete = (taskId) => {
+        setConfirmTaskId(taskId);
+        setShowConfirm(true);
     };
 
     const handleDelete = async (taskId) => {
@@ -67,8 +48,50 @@ const Dashboard = () => {
         }
     };
 
+    const handleConfirmDelete = async () => {
+        if (confirmTaskId) {
+            await handleDelete(confirmTaskId);
+        }
+        setShowConfirm(false);
+        setConfirmTaskId(null);
+    };
+
+    const handleCancelDelete = () => {
+        setShowConfirm(false);
+        setConfirmTaskId(null);
+    };
+
     return (
         <div className={`min-h-screen ${mode ? 'bg-gradient-to-br from-amber-50 to-orange-100' : 'bg-black'} flex flex-col items-center p-4 sm:p-10 overflow-x-hidden pt-24 sm:pt-20`}>
+            {/* Updated: Confirmation at top-center, no overlay, clear background */}
+            <AnimatePresence>
+                {showConfirm && (
+                    <motion.div
+                        className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-2xl max-w-[300px] w-full z-50 mx-auto"
+                        initial={{ opacity: 0, y: -20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.2 }}
+                    >
+                        <p className="text-center font-medium mb-3">Are you sure you want to delete?</p>
+                        <div className="flex justify-center gap-3">
+                            <button
+                                onClick={handleConfirmDelete}
+                                className="bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 transition-colors"
+                            >
+                                OK
+                            </button>
+                            <button
+                                onClick={handleCancelDelete}
+                                className="bg-gray-300 px-3 py-1 text-sm rounded hover:bg-gray-400 transition-colors"
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <motion.h1
                 className="text-2xl sm:text-4xl font-extrabold text-orange-600 mb-6 sm:mb-10 drop-shadow-md tracking-wide text-center"
                 initial={{ opacity: 0, y: -20 }}
@@ -154,7 +177,7 @@ const Dashboard = () => {
                                 </button>
                                 <button
                                     onClick={() => {
-                                        confirmDelete(() => handleDelete(ele.id));
+                                        confirmDelete(ele.id);
                                     }}
                                     className="px-4 py-2 text-sm sm:px-5 sm:py-2 rounded-lg sm:rounded-xl bg-gradient-to-r from-rose-400 to-red-500 text-white font-semibold shadow-md hover:shadow-lg hover:scale-[1.05] transition-transform duration-300"
                                 >

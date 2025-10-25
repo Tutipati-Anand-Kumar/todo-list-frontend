@@ -16,6 +16,7 @@ const Register = () => {
         password: "",
         repassword: ""
     });
+    
     const [show, setShow] = useState(true);
     const [passerror, setPassError] = useState([]);
     const [passMatchError, setPassMatchError] = useState(false);

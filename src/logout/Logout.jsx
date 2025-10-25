@@ -2,13 +2,15 @@ import React, { useContext } from 'react'
 import { GiCrossedBones } from "react-icons/gi";
 import { GlobalContext } from '../context/Context'
 import { createPortal } from 'react-dom';
+import toast from 'react-hot-toast';
 
 const Logout = ({handleNoLogout}) => {
     let {userdata, setUserData} = useContext(GlobalContext);
     // console.log(userdata.loggedEmail);
 
     const handleYesLogout = () =>{
-        setUserData((preVal)=>({...preVal,loggedEmail:null}))  
+        toast.success("Logout Successful");
+        setUserData((preVal)=>({...preVal,loggedEmail:null}));
     }
 
     return createPortal(

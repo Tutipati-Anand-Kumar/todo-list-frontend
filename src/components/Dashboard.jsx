@@ -63,27 +63,27 @@ const Dashboard = () => {
 
     return (
         <div className={`min-h-screen ${mode ? 'bg-gradient-to-br from-amber-50 to-orange-100' : 'bg-black'} flex flex-col items-center p-4 sm:p-10 overflow-x-hidden pt-24 sm:pt-20`}>
-            {/* Updated: Confirmation at top-center, no overlay, clear background */}
+            {/* Updated: Responsive confirmation dialog - smaller on mobile (<640px), improved rounded-xl border radius, reduced padding/font sizes/gaps below sm */}
             <AnimatePresence>
                 {showConfirm && (
                     <motion.div
-                        className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-2xl max-w-[300px] w-full z-50 mx-auto"
+                        className="fixed top-4 left-1/2 transform -translate-x-1/2 bg-white p-2 sm:p-4 rounded-xl shadow-2xl max-w-[250px] sm:max-w-[300px] w-full z-50 mx-auto"
                         initial={{ opacity: 0, y: -20 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -20 }}
                         transition={{ duration: 0.2 }}
                     >
-                        <p className="text-center font-medium mb-3">Are you sure you want to delete?</p>
-                        <div className="flex justify-center gap-3">
+                        <p className="text-center font-medium mb-2 sm:mb-3 text-sm sm:text-base">Are you sure you want to delete?</p>
+                        <div className="flex justify-center gap-2 sm:gap-3">
                             <button
                                 onClick={handleConfirmDelete}
-                                className="bg-red-500 text-white px-3 py-1 text-sm rounded hover:bg-red-600 transition-colors"
+                                className="bg-red-500 text-white px-2 sm:px-3 py-1 text-xs sm:text-sm rounded hover:bg-red-600 transition-colors"
                             >
                                 OK
                             </button>
                             <button
                                 onClick={handleCancelDelete}
-                                className="bg-gray-300 px-3 py-1 text-sm rounded hover:bg-gray-400 transition-colors"
+                                className="bg-gray-300 px-2 sm:px-3 py-1 text-xs sm:text-sm rounded hover:bg-gray-400 transition-colors"
                             >
                                 Cancel
                             </button>

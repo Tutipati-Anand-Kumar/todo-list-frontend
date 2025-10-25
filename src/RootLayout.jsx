@@ -180,7 +180,7 @@ const RootLayout = () => {
         {
           logout && <Logout handleNoLogout={handleNoLogout} ></Logout>
         }
-      <main className="h-full overflow-y-auto pt-[60px]"> 
+      <main className="h-full overflow-y-auto"> 
         <Outlet /> 
       </main>
     </div>

@@ -72,7 +72,7 @@ const Login = () => {
     };
 
     return (
-        <div className={`min-h-screen w-full flex items-center justify-center pt-20 sm:pt-10 overflow-none ${mode ? 'bg-gradient-to-br from-purple-600 via-blue-500 to-cyan-400' : 'bg-black'}`}>
+        <div className={`min-h-screen w-full flex items-center justify-center sm:pt-10 overflow-none ${mode ? 'bg-gradient-to-br from-purple-600 via-blue-500 to-cyan-400' : 'bg-black'}`}>
             <form
                 className={`flex flex-col w-11/12 max-w-sm sm:max-w-md bg-white/90 backdrop-blur-sm p-6 sm:p-10 rounded-2xl sm:rounded-3xl shadow-2xl gap-5 sm:gap-6 transition-all duration-300`}
                 onSubmit={handleSubmit}

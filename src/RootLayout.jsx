@@ -94,10 +94,10 @@ const RootLayout = () => {
                             Bubble Trail
                         </div>
                         <div 
-                            className={`p-2 cursor-pointer transition-colors text-sm ${effectType === 'stars' ? 'bg-indigo-600 text-white font-bold' : 'text-gray-200 hover:bg-gray-600'}`}
-                            onClick={() => switchEffectType('stars')}
+                            className={`p-2 cursor-pointer transition-colors text-sm ${effectType === 'flowers' ? 'bg-indigo-600 text-white font-bold' : 'text-gray-200 hover:bg-gray-600'}`}
+                            onClick={() => switchEffectType('flowers')}
                         >
-                            stars Trail
+                            flowers Trail
                         </div>
                     </div>
                 )}

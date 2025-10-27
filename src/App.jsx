@@ -6,14 +6,14 @@ import { RouterProvider } from 'react-router-dom';
 import route from './route';
 import MouseTrail from './mousetrial/MouseTrail';
 import { GlobalContext } from './context/Context';
-import Stars from './mousetrial/Stars';
+import Flowers from './mousetrial/Flowers';
 
 const App = () => {
   const { trailEffectOn, effectType } = useContext(GlobalContext);
   return (
     <>     
        {trailEffectOn && effectType === 'mouseTrail' && <MouseTrail />}
-       {trailEffectOn && effectType === 'stars' && <Stars />}
+       {trailEffectOn && effectType === 'flowers' && <Flowers />}
        <RouterProvider router={route}></RouterProvider>
        <Toaster ></Toaster>
     </>

@@ -51,7 +51,9 @@ const Login = () => {
             let { email, password } = formdata
             let payload = { email, password }
 
+            toast.loading("Please wait...", { id: "loading" });
             let res = await service.loginUser(payload);
+            toast.dismiss("loading");
 
             if (res.isCredintials) {
                 toast.success("user login successful");

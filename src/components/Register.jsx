@@ -54,12 +54,12 @@ const Register = () => {
 
         if (formdata.password !== formdata.repassword) {
             setPassMatchError(true);
-            toast.error("Passwords don't match ❌");
+            toast.error("Passwords don't match");
             return;
         }
 
         if (passerror.length > 0 && passerror !== "No Error Detected") {
-            toast.error("Please fix password errors ❌");
+            toast.error("Please fix password errors");
             return;
         }
 

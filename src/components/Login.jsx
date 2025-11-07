@@ -43,7 +43,7 @@ const Login = () => {
         e.preventDefault();
 
         if (passerror.length > 0 && passerror !== "No Error Detected") {
-            toast.error("Please fix password errors ❌");
+            toast.error("Please fix password errors");
             return;
         }
 

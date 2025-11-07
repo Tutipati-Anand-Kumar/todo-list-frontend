@@ -8,7 +8,7 @@ const PrivateRoute = ({children}) => {
 
     useEffect(()=>{
         if (!userdata.loggedEmail){ 
-            toast("❌ We have to login first")
+            toast.error("We have to login first")
        }
     }, [])
     
